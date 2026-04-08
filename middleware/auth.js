@@ -3,7 +3,7 @@
  */
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'valenhart-tv-super-secret-key-2024';
+const JWT_SECRET = process.env.JWT_SECRET || 'valenhart-tv-super-secret-key-2026';
 
 /**
  * Verify JWT — attaches req.user from store
