@@ -1,0 +1,113 @@
+{
+  "title": "IPTV Core Technologies",
+  "sections": [
+    {
+      "id": "streaming-protocols",
+      "title": "Streaming Protocols",
+      "icon": "📡",
+      "description": "Industry-standard protocols for delivering live and on-demand video over IP networks.",
+      "items": [
+        {
+          "name": "HLS (HTTP Live Streaming)",
+          "description": "Apple's adaptive bitrate protocol that segments video into chunks delivered over HTTP. Widely supported across browsers, smart TVs, and mobile devices."
+        },
+        {
+          "name": "MPEG-DASH",
+          "description": "An open, codec-agnostic adaptive streaming standard. Offers flexible bitrate adaptation and is well-suited for large-scale VOD and live delivery."
+        },
+        {
+          "name": "RTSP / RTP",
+          "description": "Low-latency protocols used for IP camera feeds and legacy IPTV systems. RTSP handles session control while RTP carries the media payload."
+        }
+      ]
+    },
+    {
+      "id": "video-encoding",
+      "title": "Video Encoding & Transcoding",
+      "icon": "🎞",
+      "description": "Codecs and tools that compress, convert, and optimize video for efficient streaming delivery.",
+      "items": [
+        {
+          "name": "H.264 (AVC)",
+          "description": "The most widely deployed video codec. Delivers strong compression with broad hardware and software decoding support across all platforms."
+        },
+        {
+          "name": "H.265 (HEVC)",
+          "description": "Successor to H.264 offering up to 50% better compression at equivalent quality. Ideal for 4K and bandwidth-constrained delivery."
+        },
+        {
+          "name": "FFmpeg",
+          "description": "Open-source multimedia framework for transcoding, muxing, filtering, and streaming. The de facto tool for server-side video processing pipelines."
+        },
+        {
+          "name": "Hardware Encoders",
+          "description": "GPU-accelerated encoding via NVIDIA NVENC, AMD VCE, or Intel Quick Sync. Significantly reduces CPU load for high-throughput live transcoding."
+        }
+      ]
+    },
+    {
+      "id": "media-servers",
+      "title": "Media Servers",
+      "icon": "🖥",
+      "description": "Platforms that ingest, process, and distribute video streams to end users at scale.",
+      "items": [
+        {
+          "name": "Wowza Streaming Engine",
+          "description": "Enterprise-grade media server supporting RTMP, HLS, DASH, and WebRTC ingest and playback. Suitable for large-scale live and VOD deployments."
+        },
+        {
+          "name": "Xtream UI",
+          "description": "A full IPTV panel providing stream management, user authentication, EPG integration, and a built-in API for reseller and end-user access control."
+        },
+        {
+          "name": "Nginx with RTMP Module",
+          "description": "Lightweight, high-performance solution combining Nginx's HTTP serving with the nginx-rtmp-module for live RTMP ingest and HLS/DASH output."
+        }
+      ]
+    },
+    {
+      "id": "cdn",
+      "title": "Content Delivery Network (CDN)",
+      "icon": "🌐",
+      "description": "Global edge networks that cache and deliver video content with low latency and high availability.",
+      "items": [
+        {
+          "name": "Cloudflare",
+          "description": "Edge CDN with built-in DDoS protection, stream caching, and Cloudflare Stream for video hosting. Strong free-tier offering with global PoP coverage."
+        },
+        {
+          "name": "Akamai Technologies",
+          "description": "Enterprise CDN with one of the largest edge networks. Offers advanced stream optimization, token authentication, and SLA-backed delivery."
+        },
+        {
+          "name": "Amazon Web Services (AWS)",
+          "description": "CloudFront CDN paired with MediaLive and MediaPackage for end-to-end live and VOD stream packaging, encryption, and global distribution."
+        }
+      ]
+    },
+    {
+      "id": "player-applications",
+      "title": "Player Applications",
+      "icon": "▶",
+      "description": "Client-side applications and interfaces that decode and render IPTV streams for viewers.",
+      "items": [
+        {
+          "name": "VLC",
+          "description": "Open-source, cross-platform media player supporting virtually all stream formats and protocols. Widely used for testing and end-user IPTV playback."
+        },
+        {
+          "name": "IPTV Smarters",
+          "description": "Feature-rich IPTV client for Android, iOS, and smart TVs. Supports M3U playlists, Xtream Codes API, EPG, and multi-screen layouts."
+        },
+        {
+          "name": "Smart TV Apps",
+          "description": "Native applications for Samsung Tizen, LG webOS, and Android TV. Provide optimized playback experiences with remote control and EPG support."
+        },
+        {
+          "name": "HTML5 Web Players",
+          "description": "Browser-based players such as Video.js, HLS.js, and Shaka Player. Enable in-browser HLS/DASH playback without plugins via the Media Source Extensions API."
+        }
+      ]
+    }
+  ]
+}
