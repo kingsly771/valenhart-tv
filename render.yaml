@@ -1,0 +1,97 @@
+# ═══════════════════════════════════════════════════════
+#  VALENHART TV v11 — Render Infrastructure as Code
+#  Deploy with: push to GitHub → Render auto-deploys
+#  Or manually: render deploy --service <service-id>
+# ═══════════════════════════════════════════════════════
+
+databases:
+  - name: valenhart-db
+    databaseName: valenhart_tv
+    user: valenhart
+    plan: free                     # upgrade to starter ($7/mo) for more connections
+    region: oregon                 # change to: frankfurt, singapore, ohio, virginia
+
+services:
+  - type: web
+    name: valenhart-tv
+    runtime: node
+    region: oregon                 # must match database region above
+    plan: free                     # upgrade to starter for always-on (no sleep)
+    branch: main                   # change if your default branch is different
+
+    # ── Build ─────────────────────────────────────────
+    buildCommand: |
+      npm install &&
+      npx prisma generate &&
+      npx prisma migrate deploy
+
+    # ── Start ─────────────────────────────────────────
+    startCommand: node server.js
+
+    # ── Health check ──────────────────────────────────
+    healthCheckPath: /api/stats
+
+    # ── Environment variables ─────────────────────────
+    envVars:
+
+      # Server
+      - key: NODE_ENV
+        value: production
+
+      - key: PORT
+        value: 3000
+
+      # App URL — Render sets this automatically, but we reference it explicitly
+      - key: APP_URL
+        fromService:
+          name: valenhart-tv
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
+
+      # Database — auto-wired from the database above
+      - key: DATABASE_URL
+        fromDatabase:
+          name: valenhart-db
+          property: connectionString
+
+      # JWT secrets — generate with:
+      # node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+      - key: JWT_ACCESS_SECRET
+        generateValue: true        # Render auto-generates a secure random value
+
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+
+      - key: JWT_ACCESS_EXPIRES
+        value: 15m
+
+      - key: JWT_REFRESH_EXPIRES
+        value: 7d
+
+      # Cookie
+      - key: COOKIE_SECRET
+        generateValue: true
+
+      - key: COOKIE_DOMAIN
+        fromService:
+          name: valenhart-tv
+          type: web
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
+
+      # Email — fill in your real SMTP provider
+      # Free options: Resend (3k/mo), Brevo (300/day), Mailgun (5k/mo trial)
+      # Leave as-is to disable email features (app still works without them)
+      - key: SMTP_HOST
+        value: smtp.ethereal.email
+
+      - key: SMTP_PORT
+        value: 587
+
+      - key: SMTP_USER
+        value: ""                  # fill in your SMTP username
+
+      - key: SMTP_PASS
+        value: ""                  # fill in your SMTP password
+
+      - key: EMAIL_FROM
+        value: "Valenhart TV <noreply@valenhart.tv>"
